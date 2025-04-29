@@ -18,6 +18,8 @@ This is designed to be made from reclaimed/recycled materials, so there's no nee
 
 ## 2. Components
 
+![Components screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/screens/components_screen.png?raw=true)
+
 ### Arduino Mega 2560
 
 (or Arduino Uno with a PWM/Servo Driver)
@@ -55,6 +57,8 @@ The robot is built mainly using reclaimed/recycled materials, but you’ll still
 Start from the provided **frame design template** as a guide.
 
 This can (and should) be adapted depending on the materials you have at hand.
+
+[![frame design template button](https://img.shields.io/badge/Open%20the%20Template-PDF-red?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=white)](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/template/frame_design_template.pdf)
 
 ### Code Logic
 
