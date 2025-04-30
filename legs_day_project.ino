@@ -38,7 +38,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Initializing the quadruped walking plant robot...");
   
-  // Attacher tous les servos à leurs pins respectifs
+
   LFR_A1.attach(pinLFR_A1);
   LFR_A2.attach(pinLFR_A2);
   LFL_A1.attach(pinLFL_A1);
@@ -103,7 +103,7 @@ void loop() {
     lightMeasurement[2] = analogRead(photoresistorPin);
     Serial.println("Light to the left:  " + String(lightMeasurement[2]));
     
-    // Déterminer la direction avec le plus de lumière
+    // Get the direction with the highest light level
     if (lightMeasurement[0] >= lightMeasurement[1] && lightMeasurement[0] >= lightMeasurement[2]) {
       optimalDirection = 0; //  Initial position
       // Return to the initial position (currently on the left)
@@ -161,7 +161,7 @@ void moveForward() {
   Serial.println("Forward walking cycle");
   
   // 1. Right Front Leg (LFR)
-  LFR_A2.write(130); // Lift the leg
+  LFR_A2.write(50); // Lift the leg
   delay(waitTime);
   LFR_A1.write(120); // Move the hip forward
   delay(waitTime);
@@ -206,7 +206,7 @@ void turnLeft() {
   Serial.println("Left rotation cycle");
   
   // 1. Right Front Leg (LFR)
-  LFR_A2.write(130); // Lift the leg
+  LFR_A2.write(50); // Lift the leg
   delay(waitTime);
   LFR_A1.write(120); // Move the hip forward
   delay(waitTime);
@@ -218,7 +218,7 @@ void turnLeft() {
   // 2. Left Back Leg (LBL)
   LBL_A2.write(130); // Lift the leg
   delay(waitTime);
-  LBL_A1.write(120); // Move the hip forward
+  LBL_A1.write(120); // Move the hip backward
   delay(waitTime);
   LBL_A2.write(90);  // Rest the leg
   delay(waitTime);
@@ -228,7 +228,7 @@ void turnLeft() {
   // 3. Left Front Leg (LFL)"
   LFL_A2.write(130); // Lift the leg
   delay(waitTime);
-  LFL_A1.write(120); // Move the hip forward
+  LFL_A1.write(120); // Move the hip backward
   delay(waitTime);
   LFL_A2.write(90);  // Rest the leg
   delay(waitTime);
@@ -263,7 +263,7 @@ void turnRight() {
   // 2. Right Back Leg (LBR)
   LBR_A2.write(50);  // Lift the leg
   delay(waitTime);
-  LBR_A1.write(60);  // Move the hip forward
+  LBR_A1.write(60);  // Move the hip backward
   delay(waitTime);
   LBR_A2.write(90);  // Rest the leg
   delay(waitTime);
@@ -271,9 +271,9 @@ void turnRight() {
   delay(waitTime);
   
   // 3. Right Front Leg (LFR)
-  LFR_A2.write(130); // Lift the leg
+  LFR_A2.write(50); // Lift the leg
   delay(waitTime);
-  LFR_A1.write(60);  // Move the hip forward
+  LFR_A1.write(60);  // Move the hip backward
   delay(waitTime);
   LFR_A2.write(90);  // Rest the leg
   delay(waitTime);

@@ -60,6 +60,85 @@ This can (and should) be adapted depending on the materials you have at hand.
 
 [![frame design template button](https://img.shields.io/badge/Open%20the%20Template-PDF-red?style=for-the-badge&logo=adobeacrobatreader&logoColor=white&color=white)](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/template/frame_design_template.pdf)
 
+### Individual Servo Test and Initial Setup
+
+To make it easier to set the starting positions of your servo motors when you're putting everything together, you might need to test and adjust each servo's position on its own, one at a time. Test and adjust each servo individually by connecting it to a microcontroller like an Arduino Uno and using specific code. For the following example code, ensure the servo's signal wire is connected to Arduino pin 9.
+
+```cpp 
+
+#include <Servo.h>
+
+Servo servoToTest;
+
+const int pinServo = 9;
+int actualPosition = 90;
+const int posMin = 0;
+const int posMax = 180;
+String inputString = "";
+boolean stringComplete = false;
+
+void setup() {
+  Serial.begin(9600);
+
+  servoToTest.attach(pinServo);
+
+  servoToTest.write(actualPosition);
+  delay(1000);
+
+  Serial.print("Actual Servo position: ");
+  Serial.println(actualPosition);
+
+  showInstructions();
+}
+
+void loop() {
+  if (stringComplete) {
+
+    int newPosition = inputString.toInt();
+
+    if (newPosition >= posMin && newPosition <= posMax) {
+      Serial.print("Changed Servo position: ");
+      Serial.println(newPosition);
+
+      servoToTest.write(newPosition);
+      actualPosition = newPosition;
+      delay(500);
+
+      Serial.print("Actual Servo position: ");
+      Serial.println(actualPosition);
+    } else {
+      Serial.print("Error: Position should be between ");
+      Serial.print(posMin);
+      Serial.print(" and ");
+      Serial.println(posMax);
+    }
+
+    inputString = "";
+    stringComplete = false;
+
+    showInstructions();
+  }
+
+
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+
+
+    if (inChar == '\n') {
+      stringComplete = true;
+    } else {
+      inputString += inChar;
+    }
+  }
+}
+
+void showInstructions() {
+  Serial.println("\n--- Servo motor control ---");
+  Serial.print("> ");
+}
+
+```
+
 ### Code Logic
 
 The robot follows a simple decision loop:
@@ -72,6 +151,23 @@ The robot follows a simple decision loop:
 The **ultrasonic sensor** acts as a safety mechanism:
 
 - If an obstacle is detected **within ~5 cm**, the robot stops and **turns around** to avoid collision.
+
+### Wiring 
+
+| Articulation | Arduino Mega Pin | Description                                      |
+|--------------|------------------|--------------------------------------------------|
+| LFR_A1       | 2                | Right Front Leg Hip                               |
+| LFR_A2       | 3                | Right Front Leg Femur-Tibia Joint                 |
+| LFL_A1       | 4                | Left Front Leg Hip                                |
+| LFL_A2       | 5                | Left Front Leg Femur-Tibia Joint                  |
+| LBR_A1       | 6                | Right Back Leg Hip                                |
+| LBR_A2       | 7                | Right Back Leg Femur-Tibia Joint                  |
+| LBL_A1       | 8                | Left Back Leg Hip                                 |
+| LBL_A2       | 9                | Left Back Leg Femur-Tibia Joint                   |
+
+
+
+
 
 ## Contribute
 
