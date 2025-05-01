@@ -16,6 +16,11 @@ This is designed to be made from reclaimed/recycled materials, so there's no nee
 - **Build using reclaimed/recycled materials :** avoid 3D printing and make the design as universal and accessible as possible.
 - **Learn & share through robotics : m**ake it fun and collaborative while learning about electronics, sensors, and movement.
 
+### What is the project's status? the Bambi walk
+
+Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. But that got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
+
+
 ## 2. Components
 
 ![Components screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/screens/components_screen.png?raw=true)
@@ -139,7 +144,7 @@ void showInstructions() {
 
 ```
 
-### Code Logic
+### Code Logic (Work in Progress - Further Optimizations Possible)
 
 The robot follows a simple decision loop:
 
@@ -169,6 +174,12 @@ The **ultrasonic sensor** acts as a safety mechanism:
 
 
 
-## Contribute
+## 5. Contribute
 
 Feel free to fork, remix, improve or completely reimagine the build.
+
+**There is still work left...**
+
+Well... gravity is a real downer.
+Here's a typical fail :
+

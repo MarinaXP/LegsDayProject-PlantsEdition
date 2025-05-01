@@ -158,134 +158,158 @@ void loop() {
 
 // Function for moveForward (complete walking cycle)
 void moveForward() {
-  Serial.println("Forward walking cycle");
+  Serial.println("Forward walking cycle - with weight balancing");
   
-  // 1. Right Front Leg (LFR)
-  LFR_A2.write(50); // Lift the leg
+  // 1. Right Front Leg (LFR) + help from left back leg (LBL)
+  LBL_A2.write(110); // Slight push with the opposite diagonal leg
+  LFR_A2.write(50);  // Lift the right front leg
   delay(waitTime);
   LFR_A1.write(120); // Move the hip forward
   delay(waitTime);
   LFR_A2.write(90);  // Rest the leg
+  LBL_A2.write(90);  // Return the left back leg to neutral position
   delay(waitTime);
   LFR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 2. Left Back Leg (LBL)
-  LBL_A2.write(130); // Lift the leg
+  // 2. Left Back Leg (LBL) + help from right front leg (LFR)
+  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBL_A2.write(130); // Lift the left back leg
   delay(waitTime);
   LBL_A1.write(60);  // Move the hip forward
   delay(waitTime);
   LBL_A2.write(90);  // Rest the leg
+  LFR_A2.write(90);  // Return the right front leg to neutral position
   delay(waitTime);
   LBL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 3. Left Front Leg (LFL)"
-  LFL_A2.write(130); // Lift the leg
+  // 3. Left Front Leg (LFL) + help from right back leg (LBR)
+  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LFL_A2.write(130); // Lift the left front leg
   delay(waitTime);
   LFL_A1.write(60);  // Move the hip forward
   delay(waitTime);
   LFL_A2.write(90);  // Rest the leg
+  LBR_A2.write(90);  // Return the right back leg to neutral position
   delay(waitTime);
   LFL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 4. Right Back Leg (LBR)
-  LBR_A2.write(50);  // Lift the leg (note the different angle here)
+  // 4. Right Back Leg (LBR) + help from left front leg (LFL)
+  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBR_A2.write(50);  // Lift the right back leg
   delay(waitTime);
   LBR_A1.write(120); // Move the hip forward
   delay(waitTime);
   LBR_A2.write(90);  // Rest the leg
+  LFL_A2.write(90);  // Return the left front leg to neutral position
   delay(waitTime);
   LBR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
 }
 
-// Function to turn left
+// Left turn
 void turnLeft() {
-  Serial.println("Left rotation cycle");
+  Serial.println("Left rotation cycle - with weight balancing");
   
-  // 1. Right Front Leg (LFR)
-  LFR_A2.write(50); // Lift the leg
+  // 1. Right Front Leg (LFR) + help from left back leg (LBL)
+  LBL_A2.write(110); // Slight push with the opposite diagonal leg
+  LFR_A2.write(50);  // Lift the right front leg
   delay(waitTime);
   LFR_A1.write(120); // Move the hip forward
   delay(waitTime);
   LFR_A2.write(90);  // Rest the leg
+  LBL_A2.write(90);  // Return the left back leg to neutral position
   delay(waitTime);
   LFR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 2. Left Back Leg (LBL)
-  LBL_A2.write(130); // Lift the leg
+  // 2. Left Back Leg (LBL) + help from right front leg (LFR)
+  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBL_A2.write(130); // Lift the left back leg
   delay(waitTime);
-  LBL_A1.write(120); // Move the hip backward
+  LBL_A1.write(120); // Move the hip backward for left turn
   delay(waitTime);
   LBL_A2.write(90);  // Rest the leg
+  LFR_A2.write(90);  // Return the right front leg to neutral position
   delay(waitTime);
   LBL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 3. Left Front Leg (LFL)"
-  LFL_A2.write(130); // Lift the leg
+  // 3. Left Front Leg (LFL) + help from right back leg (LBR)
+  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LFL_A2.write(130); // Lift the left front leg
   delay(waitTime);
-  LFL_A1.write(120); // Move the hip backward
+  LFL_A1.write(120); // Move the hip backward for left turn
   delay(waitTime);
   LFL_A2.write(90);  // Rest the leg
+  LBR_A2.write(90);  // Return the right back leg to neutral position
   delay(waitTime);
   LFL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 4. Right Back Leg (LBR)
-  LBR_A2.write(50);  // Lift the leg
+  // 4. Right Back Leg (LBR) + help from left front leg (LFL)
+  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBR_A2.write(50);  // Lift the right back leg
   delay(waitTime);
   LBR_A1.write(120); // Move the hip forward
   delay(waitTime);
   LBR_A2.write(90);  // Rest the leg
+  LFL_A2.write(90);  // Return the left front leg to neutral position
   delay(waitTime);
   LBR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
 }
 
-// Fonction pour tourner à droite
+// Right turn
 void turnRight() {
-  Serial.println("Cycle de rotation droite");
+  Serial.println("Right rotation cycle - with weight balancing");
   
-  // 1. Left Front Leg (LFL)"
-  LFL_A2.write(130); // Lift the leg
+  // 1. Left Front Leg (LFL) + help from right back leg (LBR)
+  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LFL_A2.write(130); // Lift the left front leg
   delay(waitTime);
   LFL_A1.write(60);  // Move the hip forward
   delay(waitTime);
   LFL_A2.write(90);  // Rest the leg
+  LBR_A2.write(90);  // Return the right back leg to neutral position
   delay(waitTime);
   LFL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 2. Right Back Leg (LBR)
-  LBR_A2.write(50);  // Lift the leg
+  // 2. Right Back Leg (LBR) + help from left front leg (LFL)
+  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBR_A2.write(50);  // Lift the right back leg
   delay(waitTime);
-  LBR_A1.write(60);  // Move the hip backward
+  LBR_A1.write(60);  // Move the hip backward for right turn
   delay(waitTime);
   LBR_A2.write(90);  // Rest the leg
+  LFL_A2.write(90);  // Return the left front leg to neutral position
   delay(waitTime);
   LBR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 3. Right Front Leg (LFR)
-  LFR_A2.write(50); // Lift the leg
+  // 3. Right Front Leg (LFR) + help from left back leg (LBL)
+  LBL_A2.write(110); // Slight push with the opposite diagonal leg
+  LFR_A2.write(50);  // Lift the right front leg
   delay(waitTime);
-  LFR_A1.write(60);  // Move the hip backward
+  LFR_A1.write(60);  // Move the hip backward for right turn
   delay(waitTime);
   LFR_A2.write(90);  // Rest the leg
+  LBL_A2.write(90);  // Return the left back leg to neutral position
   delay(waitTime);
   LFR_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
   
-  // 4. Left Back Leg (LBL)
-  LBL_A2.write(130); // Lift the leg
+  // 4. Left Back Leg (LBL) + help from right front leg (LFR)
+  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
+  LBL_A2.write(130); // Lift the left back leg
   delay(waitTime);
   LBL_A1.write(60);  // Move the hip forward
   delay(waitTime);
   LBL_A2.write(90);  // Rest the leg
+  LFR_A2.write(90);  // Return the right front leg to neutral position
   delay(waitTime);
   LBL_A1.write(90);  // Return the hip to the initial position
   delay(waitTime);
