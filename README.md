@@ -183,4 +183,5 @@ Feel free to fork, remix, improve or completely reimagine the build.
 
 Well... gravity is a real downer.
 Here's a typical fail :
+
 ![Fail screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/ed93e05ee79a69bcc0ebe839201a5132297b9921/screens/fail_screen.gif?raw=true)
