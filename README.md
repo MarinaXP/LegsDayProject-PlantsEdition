@@ -1,7 +1,7 @@
 # LegsDayProject-PlantsEdition
 _You can't soak up the sun by just rooting around..._
 
-Forget just leaving your plants stuck in one place! The Legs Day Project: Plant Edition is giving them the "stem-ina" to go find their own sunshine. No longer tied down by pots, these botanical beings are on the move, driven by a serious craving for light.
+Forget just leaving your plants stuck in one place! The Legs Day Project: Plant Edition is giving them the "stem-ina" to go find their own sunshine. The vision behind this project is to create self-sufficient plants capable of navigating their environment to find the best light exposure.
 
 ![Teasing screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/8695c3020c0e6a7ebcedbb1bd697e0167b86c355/screens/presentation_screen.png?raw=true)
 
@@ -14,11 +14,11 @@ This is designed to be made from reclaimed/recycled materials, so there's no nee
 
 - **Make indoor plants autonomous :** give them legs! Let each plant move toward the light it needs, based on its own requirements.
 - **Build using reclaimed/recycled materials :** avoid 3D printing and make the design as universal and accessible as possible.
-- **Learn & share through robotics : m**ake it fun and collaborative while learning about electronics, sensors, and movement.
+- **Learn & share through robotics as a newbie :** make it fun and collaborative while learning about electronics, sensors, and movement.
 
 ### What is the project's status? the Bambi walk
 
-Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. But that got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
+Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. Got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
 
 ![Demo screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/ed93e05ee79a69bcc0ebe839201a5132297b9921/screens/demo_screen.gif?raw=true)
 
@@ -27,7 +27,6 @@ Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around
 ![Components screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/screens/components_screen.png?raw=true)
 
 ### Arduino Mega 2560
-
 (or Arduino Uno with a PWM/Servo Driver)
 
 A microcontroller board based on the [ATmega2560](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf). This was simply the board I had on hand, so that's what I started with.
