@@ -52,6 +52,8 @@ The robot is built mainly using reclaimed/recycled materials, but you’ll still
 - Cutter
 - Jumper wires
 - A compact breadboard
+- MB102 Breadboard (essential for easily powering multiple servo motors)
+- 9V battery clip power cable with 2.1x5.5mm male DC jack plug + 9V battery
 - Optional but helpful: Dremel tool for cutting and shaping materials
 
 
@@ -171,7 +173,11 @@ The **ultrasonic sensor** acts as a safety mechanism:
 | LBL_A2       | 9                | Left Back Leg Femur-Tibia Joint                   |
 
 
-
+| Component        | Arduino Pin | Description                                       |
+| :--------------- | :---------- | :------------------------------------------------ |
+| Photoresistor    | A0          | Analog signal from the photoresistor module       |
+| HC-SR04 Trigger  | 11          | Trigger pin of the ultrasonic sensor              |
+| HC-SR04 Echo     | 12          | Echo pin of the ultrasonic sensor                 |
 
 
 ## 5. Contribute

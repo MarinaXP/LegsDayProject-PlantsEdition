@@ -22,7 +22,14 @@ const int trigPin = 11;             // Ultrasonic trigger
 const int echoPin = 12;             // Ultrasonic echo
 
 // Default servo position
-const int posInitiale = 90;
+// initial position for all servos A2
+const int posInitialeA2 = 90;
+
+// initial position for servos A1 
+const int posInit_LFR_A1 = 140;
+const int posInit_LFL_A1 = 40;
+const int posInit_LBR_A1 = 40;
+const int posInit_LBL_A1 = 140;
 
 // Delay between servo movements
 const int waitTime = 300; // in milliseconds
@@ -61,7 +68,7 @@ void setup() {
 }
 
 void loop() {
-  // First, check if there is an obstacle
+  // Check if there is an obstacle
   distance = mesureDistance();
   
   if (distance < 5) {
@@ -158,54 +165,30 @@ void loop() {
 
 // Function for moveForward (complete walking cycle)
 void moveForward() {
-  Serial.println("Forward walking cycle - with weight balancing");
+  Serial.println("Forward walking cycle - better weight distribution");
   
-  // 1. Right Front Leg (LFR) + help from left back leg (LBL)
-  LBL_A2.write(110); // Slight push with the opposite diagonal leg
-  LFR_A2.write(50);  // Lift the right front leg
+  // 1. Move LFR_A2 and LBL_A2 simultaneously
+  Serial.println("Step 1: LFR_A2 and LBL_A2");
+  LFR_A2.write(50);
+  LBL_A2.write(80);
   delay(waitTime);
-  LFR_A1.write(120); // Move the hip forward
+
+  // Return to 90° for both
+  Serial.println("Return to 90°");
+  LFR_A2.write(90);
+  LBL_A2.write(90);
   delay(waitTime);
-  LFR_A2.write(90);  // Rest the leg
-  LBL_A2.write(90);  // Return the left back leg to neutral position
+
+  // 2. Move LFL_A2 and LBR_A2 simultaneously
+  Serial.println("Step 2: LFL_A2 and LBR_A2");
+  LFL_A2.write(130);
+  LBR_A2.write(100);
   delay(waitTime);
-  LFR_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 2. Left Back Leg (LBL) + help from right front leg (LFR)
-  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBL_A2.write(130); // Lift the left back leg
-  delay(waitTime);
-  LBL_A1.write(60);  // Move the hip forward
-  delay(waitTime);
-  LBL_A2.write(90);  // Rest the leg
-  LFR_A2.write(90);  // Return the right front leg to neutral position
-  delay(waitTime);
-  LBL_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 3. Left Front Leg (LFL) + help from right back leg (LBR)
-  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LFL_A2.write(130); // Lift the left front leg
-  delay(waitTime);
-  LFL_A1.write(60);  // Move the hip forward
-  delay(waitTime);
-  LFL_A2.write(90);  // Rest the leg
-  LBR_A2.write(90);  // Return the right back leg to neutral position
-  delay(waitTime);
-  LFL_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 4. Right Back Leg (LBR) + help from left front leg (LFL)
-  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBR_A2.write(50);  // Lift the right back leg
-  delay(waitTime);
-  LBR_A1.write(120); // Move the hip forward
-  delay(waitTime);
-  LBR_A2.write(90);  // Rest the leg
-  LFL_A2.write(90);  // Return the left front leg to neutral position
-  delay(waitTime);
-  LBR_A1.write(90);  // Return the hip to the initial position
+
+  // Return to 90° for both
+  Serial.println("Return to 90°");
+  LFL_A2.write(90);
+  LBR_A2.write(90);
   delay(waitTime);
 }
 
@@ -213,122 +196,123 @@ void moveForward() {
 void turnLeft() {
   Serial.println("Left rotation cycle - with weight balancing");
   
-  // 1. Right Front Leg (LFR) + help from left back leg (LBL)
-  LBL_A2.write(110); // Slight push with the opposite diagonal leg
-  LFR_A2.write(50);  // Lift the right front leg
+  // Ensure all A2 servos are at 90° before starting
+  reset_all_servos();
+  delay(500);
+
+  // 1. Move all A1 joints simultaneously to prepare for rotation
+  Serial.println("1. Positioning A1 joints for rotation");
+  LFR_A1.write(120); 
+  LBR_A1.write(90);  
+  LFL_A1.write(90);  
+  LBL_A1.write(120); 
+  delay(waitTime * 2); // Wait a bit longer to ensure all servos are in position
+
+  // 2. Execute a simplified forward walking cycle
+  Serial.println("2. Executing a walking cycle");
+
+  // 2.1 Move LFR_A2 and LBL_A2
+  Serial.println("  2.1 Lifting LFR_A2 and LBL_A2");
+  LFR_A2.write(50);
+  LBL_A2.write(70);
   delay(waitTime);
-  LFR_A1.write(120); // Move the hip forward
+
+  // Return to 90° for these two servos
+  LFR_A2.write(90);
+  LBL_A2.write(90);
   delay(waitTime);
-  LFR_A2.write(90);  // Rest the leg
-  LBL_A2.write(90);  // Return the left back leg to neutral position
+
+  // 2.2 Move LFL_A2 and LBR_A2
+  Serial.println("  2.2 Lifting LFL_A2 and LBR_A2");
+  LFL_A2.write(130);
+  LBR_A2.write(110);
   delay(waitTime);
-  LFR_A1.write(90);  // Return the hip to the initial position
+
+  // Return to 90° for these two servos
+  LFL_A2.write(90);
+  LBR_A2.write(90);
   delay(waitTime);
-  
-  // 2. Left Back Leg (LBL) + help from right front leg (LFR)
-  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBL_A2.write(130); // Lift the left back leg
-  delay(waitTime);
-  LBL_A1.write(120); // Move the hip backward for left turn
-  delay(waitTime);
-  LBL_A2.write(90);  // Rest the leg
-  LFR_A2.write(90);  // Return the right front leg to neutral position
-  delay(waitTime);
-  LBL_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 3. Left Front Leg (LFL) + help from right back leg (LBR)
-  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LFL_A2.write(130); // Lift the left front leg
-  delay(waitTime);
-  LFL_A1.write(120); // Move the hip backward for left turn
-  delay(waitTime);
-  LFL_A2.write(90);  // Rest the leg
-  LBR_A2.write(90);  // Return the right back leg to neutral position
-  delay(waitTime);
-  LFL_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 4. Right Back Leg (LBR) + help from left front leg (LFL)
-  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBR_A2.write(50);  // Lift the right back leg
-  delay(waitTime);
-  LBR_A1.write(120); // Move the hip forward
-  delay(waitTime);
-  LBR_A2.write(90);  // Rest the leg
-  LFL_A2.write(90);  // Return the left front leg to neutral position
-  delay(waitTime);
-  LBR_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
+
+  // 3. Return the A1 joints to their initial position
+  Serial.println("3. Returning A1 joints to their initial position");
+  LFR_A1.write(140); 
+  LBR_A1.write(40); 
+  LFL_A1.write(40); 
+  LBL_A1.write(140); 
+  delay(waitTime * 2); // Wait a bit longer to ensure all servos are in position
+
+  Serial.println("End of left turn");
 }
 
 // Right turn
 void turnRight() {
   Serial.println("Right rotation cycle - with weight balancing");
   
-  // 1. Left Front Leg (LFL) + help from right back leg (LBR)
-  LBR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LFL_A2.write(130); // Lift the left front leg
+  // Ensure all A2 servos are at 90° before starting
+  reset_all_servos();
+  delay(500);
+
+  // 1. Move all A1 joints simultaneously to prepare for rotation
+  Serial.println("1. Positioning A1 joints for rotation");
+  LFR_A1.write(90); 
+  LBR_A1.write(20); 
+  LFL_A1.write(20); 
+  LBL_A1.write(90); 
+  delay(waitTime * 2); // Wait a bit longer to ensure all servos are in position
+
+  // 2. Execute a simplified forward walking cycle
+  Serial.println("2. Executing a walking cycle");
+
+  // 2.1 Move LFR_A2 and LBL_A2
+  Serial.println("  2.1 Lifting LFR_A2 and LBL_A2");
+  LFR_A2.write(50);
+  LBL_A2.write(70);
   delay(waitTime);
-  LFL_A1.write(60);  // Move the hip forward
+
+  // Return to 90° for these two servos
+  LFR_A2.write(90);
+  LBL_A2.write(90);
   delay(waitTime);
-  LFL_A2.write(90);  // Rest the leg
-  LBR_A2.write(90);  // Return the right back leg to neutral position
+
+  // 2.2 Move LFL_A2 and LBR_A2
+  Serial.println("  2.2 Lifting LFL_A2 and LBR_A2");
+  LFL_A2.write(130);
+  LBR_A2.write(110);
   delay(waitTime);
-  LFL_A1.write(90);  // Return the hip to the initial position
+
+  // Return to 90° for these two servos
+  LFL_A2.write(90);
+  LBR_A2.write(90);
   delay(waitTime);
-  
-  // 2. Right Back Leg (LBR) + help from left front leg (LFL)
-  LFL_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBR_A2.write(50);  // Lift the right back leg
-  delay(waitTime);
-  LBR_A1.write(60);  // Move the hip backward for right turn
-  delay(waitTime);
-  LBR_A2.write(90);  // Rest the leg
-  LFL_A2.write(90);  // Return the left front leg to neutral position
-  delay(waitTime);
-  LBR_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 3. Right Front Leg (LFR) + help from left back leg (LBL)
-  LBL_A2.write(110); // Slight push with the opposite diagonal leg
-  LFR_A2.write(50);  // Lift the right front leg
-  delay(waitTime);
-  LFR_A1.write(60);  // Move the hip backward for right turn
-  delay(waitTime);
-  LFR_A2.write(90);  // Rest the leg
-  LBL_A2.write(90);  // Return the left back leg to neutral position
-  delay(waitTime);
-  LFR_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
-  
-  // 4. Left Back Leg (LBL) + help from right front leg (LFR)
-  LFR_A2.write(70);  // Slight push with the opposite diagonal leg
-  LBL_A2.write(130); // Lift the left back leg
-  delay(waitTime);
-  LBL_A1.write(60);  // Move the hip forward
-  delay(waitTime);
-  LBL_A2.write(90);  // Rest the leg
-  LFR_A2.write(90);  // Return the right front leg to neutral position
-  delay(waitTime);
-  LBL_A1.write(90);  // Return the hip to the initial position
-  delay(waitTime);
+
+  // 3. Return the A1 joints to their initial position
+  Serial.println("3. Returning A1 joints to their initial position");
+  LFR_A1.write(140); 
+  LBR_A1.write(40); 
+  LFL_A1.write(40); 
+  LBL_A1.write(140); 
+  delay(waitTime * 2); // Wait a bit longer to ensure all servos are in position
+
+  Serial.println("End of right turn");
 }
 
-// Function to reset all servos to 90°
+// Function to reset all servos to their initial positions
 void reset_all_servos() {
-  Serial.println("Resetting all servos to 90°");
+  Serial.println("Resetting all servos to their initial positions");
   
-  LFR_A1.write(posInitiale);
-  LFR_A2.write(posInitiale);
-  LFL_A1.write(posInitiale);
-  LFL_A2.write(posInitiale);
-  LBR_A1.write(posInitiale);
-  LBR_A2.write(posInitiale);
-  LBL_A1.write(posInitiale);
-  LBL_A2.write(posInitiale);
+  // Reset A1 servos to their specific initial positions
+  LFR_A1.write(posInit_LFR_A1); // Front right leg A1 joint to 140°
+  LFL_A1.write(posInit_LFL_A1); // Front left leg A1 joint to 40°
+  LBR_A1.write(posInit_LBR_A1); // Back right leg A1 joint to 40°
+  LBL_A1.write(posInit_LBL_A1); // Back left leg A1 joint to 140°
   
-  // Wait for all servos to reach their position
+  // Reset all A2 servos to the common initial position (90°)
+  LFR_A2.write(posInitialeA2);
+  LFL_A2.write(posInitialeA2);
+  LBR_A2.write(posInitialeA2);
+  LBL_A2.write(posInitialeA2);
+  
+  // Wait for all servos to reach their positions
   delay(1000);
 }
 
