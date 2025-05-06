@@ -18,7 +18,7 @@ This is designed to be made from reclaimed/recycled materials, so there's no nee
 
 ### What is the project's status? the Bambi walk
 
-Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. Got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
+Top speed when loaded :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. Got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
 
 ![Demo screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/767182b7976bedbbf7e33cfbc9c8de33b11784f5/screens/demo_screen.gif?raw=true)
 ![Demo walking screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/767182b7976bedbbf7e33cfbc9c8de33b11784f5/screens/demowalking_screen.gif?raw=true)
