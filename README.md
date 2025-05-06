@@ -20,8 +20,8 @@ This is designed to be made from reclaimed/recycled materials, so there's no nee
 
 Top speed :  we're crawling at 0.0024 km/h. Basically, a snail could laps around this thing. Got me thinking: let's aim for a cruising speed faster than a snail's top sprint an call it snail evasion tech. Seriously though, this bot's a bit chunky for these motors, so that's the main thing to fix next.
 
-![Demo screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/ed93e05ee79a69bcc0ebe839201a5132297b9921/screens/demo_screen.gif?raw=true)
-
+![Demo screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/767182b7976bedbbf7e33cfbc9c8de33b11784f5/screens/demo_screen.gif?raw=true)
+![Demo walking screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/767182b7976bedbbf7e33cfbc9c8de33b11784f5/screens/demowalking_screen.gif?raw=true)
 ## 2. Components
 
 ![Components screen](https://github.com/MarinaXP/LegsDayProject-PlantsEdition/blob/14770e5b5dd6bb3246399408cfe04ad0a832e10e/screens/components_screen.png?raw=true)
